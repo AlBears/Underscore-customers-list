@@ -10,6 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="data.json"></script>
   </head>
 
   <body>
@@ -36,12 +37,46 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          START HERE
+          <div id="customerTable"></div>
         </div>
       </div>
     </div><!-- /.container -->
 
+    <script type="text/template" class="customerTable">
+      <h2 class="page-header">Customers</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Company</th>
+            <th>Email</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% _.each(customers, function(customer){ %>
+            <tr>
+              <td><%- customer._id %></td>
+              <td><%- customer.name %></td>
+              <td><%- customer.company %></td>
+              <td><%- customer.email %></td>
+              <td><a class="btn btn-default" href="details.html?customer=<%- customer._id %>">Details</a></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </script>
     <script>
+      var customerTableTemplate = _.template($("script.customerTable").html());
+      var customers = _.sortBy(customers, 'name');
+      var templateData = {
+        customers: customers
+      }
+
+      $('#customerTable').html(customerTableTemplate(templateData));
 
     </script>
+  </body>
+  </html>
    
