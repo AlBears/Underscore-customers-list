@@ -1,0 +1,1 @@
+Simple underscore project. Resource ://www.udemy.com/learn-to-build-web-apps-using-underscorejs-code-like-a-pro/.
